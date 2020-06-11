@@ -8,42 +8,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  List<Map> _desingers = [
-    {
-      'img':
-          'https://img.zzxdc.com/resources/fang_img/2019/07/18/156341823758128.jpeg!project-zzx-common-vip-big',
-      'name': '设计师'
-    },
-    {
-      'img':
-          'https://img.zzxdc.com/resources/fang_img/2019/03/06/155184350280047.jpeg!project-zzx-common-vip-big',
-      'name': '设计师'
-    },
-    {
-      'img':
-          'https://img.zzxdc.com/public/2020/04/10/524JNfZs2RBhJGH.jpg!project-zzx-common-vip-big',
-      'name': '设计师'
-    },
-    {
-      'img':
-          'https://img.zzxdc.com/resources/fang_img/2019/07/18/156341823758128.jpeg!project-zzx-common-vip-big',
-      'name': '设计师'
-    },
-    {
-      'img':
-          'https://img.zzxdc.com/resources/fang_img/2019/03/06/155184350280047.jpeg!project-zzx-common-vip-big',
-      'name': '设计师'
-    },
-    {
-      'img':
-          'https://img.zzxdc.com/public/2020/04/10/524JNfZs2RBhJGH.jpg!project-zzx-common-vip-big',
-      'name': '设计师'
-    },
-  ];
-
-  List<Map> _works = [
-    {'img': '', 'title': '', 'author': '', 'avatar': '', 'level': '', 'vip': ''}
-  ];
+  // List<Map> _works = [
+  //   {'img': '', 'title': '', 'author': '', 'avatar': '', 'level': '', 'vip': ''}
+  // ];
 
   @override
   Widget build(BuildContext context) {
@@ -56,125 +23,9 @@ class _HomeScreenState extends State<HomeScreen> {
           SwiperWidget(),
           GridWidget(),
           TabWidget(title: "设计师"),
-          Container(
-            height: 420,
-            // color: Colors.red,
-            child: GridView.builder(
-              physics:
-                  NeverScrollableScrollPhysics(), // 处理GridView中滑动父级Listview无法滑动
-              itemCount: 6,
-              padding: EdgeInsets.all(10),
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  child: Column(
-                    children: <Widget>[
-                      Image.network(
-                        _desingers[index]['img'],
-                        fit: BoxFit.fitHeight,
-                        height: 160,
-                      ),
-                      Text(_desingers[index]['name'])
-                    ],
-                  ),
-                );
-              },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 4 / 7),
-            ),
-          ),
-          TabWidget(title: '作品'),
-          ListView.builder(
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                padding: EdgeInsets.all(10),
-                child: Row(
-                  children: <Widget>[
-                    Image.network(
-                      'https://img.zzxdc.com/resources/fang_img/2019/07/13/156298674021773.jpeg!works_cover',
-                      width: 170.0,
-                      fit: BoxFit.fitHeight,
-                    ),
-                    Expanded(
-                      child: Container(
-                        height: 115,
-                        // color: Colors.red,
-                        padding: EdgeInsets.all(5),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          // mainAxisSize: MainAxisSize.max,
-                          // textBaseline: TextBaseline.alphabetic,
-                          // verticalDirection: VerticalDirection.down,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text('标题标题标题'),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: <Widget>[
-                                CircleAvatar(
-                                  radius: 12.0,
-                                  backgroundImage: NetworkImage(
-                                      'https://img.zzxdc.com/resources/static/images/noavatar_middle.gif!avter_big'),
-                                ),
-                                Text('陌上'),
-                                Image.network(
-                                  'https://img.zzxdc.com/public/level/LV3.png',
-                                  width: 50.0,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                                Image.network(
-                                  'https://m.zzxdc.com/static/mobile/img/index/vip_reload.png',
-                                  width: 50.0,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                Container(
-                                  width: 65,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.thumb_up,
-                                        color: Colors.black26,
-                                      ),
-                                      Text('1111')
-                                    ],
-                                  ),
-                                ),
-                                Container(
-                                  width: 65,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: <Widget>[
-                                      Icon(
-                                        Icons.remove_red_eye,
-                                        color: Colors.black26,
-                                      ),
-                                      Text('222')
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-            shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
-            physics: NeverScrollableScrollPhysics(), //禁用滑动事件
-            itemCount: 10,
-          ),
+          DesignerWidget(),
+          TabWidget(title: '案例作品'),
+          WorksWidget(),
         ],
       ),
     );
@@ -296,19 +147,190 @@ class GridWidget extends StatelessWidget {
   }
 }
 
-// 点击加载更多
+// 点击更多
 class TabWidget extends StatelessWidget {
   final String title;
   const TabWidget({Key key, @required this.title}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Text(
-        '$title',
-        style: TextStyle(
-            fontSize: 18.0, fontWeight: FontWeight.w700, color: Colors.red),
+        // color: Colors.black12,
+        padding: EdgeInsets.fromLTRB(15, 10, 15, 10),
+        child: Row(
+          // crossAxisAlignment: CrossAxisAlignment.end, //贴近底部
+          children: <Widget>[
+            Expanded(
+              child: Text(
+                '$title',
+                style: TextStyle(
+                    fontSize: 18.0,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.red),
+              ),
+            ),
+            Text('查看更多'),
+          ],
+        ));
+  }
+}
+
+class DesignerWidget extends StatelessWidget {
+  final List<Map> _desingers = [
+    {
+      'img':
+          'https://img.zzxdc.com/resources/fang_img/2019/07/18/156341823758128.jpeg!project-zzx-common-vip-big',
+      'name': '设计师'
+    },
+    {
+      'img':
+          'https://img.zzxdc.com/resources/fang_img/2019/03/06/155184350280047.jpeg!project-zzx-common-vip-big',
+      'name': '设计师'
+    },
+    {
+      'img':
+          'https://img.zzxdc.com/public/2020/04/10/524JNfZs2RBhJGH.jpg!project-zzx-common-vip-big',
+      'name': '设计师'
+    },
+    {
+      'img':
+          'https://img.zzxdc.com/resources/fang_img/2019/07/18/156341823758128.jpeg!project-zzx-common-vip-big',
+      'name': '设计师'
+    },
+    {
+      'img':
+          'https://img.zzxdc.com/resources/fang_img/2019/03/06/155184350280047.jpeg!project-zzx-common-vip-big',
+      'name': '设计师'
+    },
+    {
+      'img':
+          'https://img.zzxdc.com/public/2020/04/10/524JNfZs2RBhJGH.jpg!project-zzx-common-vip-big',
+      'name': '设计师'
+    },
+  ];
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 420,
+      // color: Colors.red,
+      child: GridView.builder(
+        physics: NeverScrollableScrollPhysics(), // 处理GridView中滑动父级Listview无法滑动
+        itemCount: 6,
+        padding: EdgeInsets.all(10),
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            child: Column(
+              children: <Widget>[
+                Image.network(
+                  _desingers[index]['img'],
+                  fit: BoxFit.fitHeight,
+                  height: 160,
+                ),
+                Text(_desingers[index]['name'])
+              ],
+            ),
+          );
+        },
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3, crossAxisSpacing: 10, childAspectRatio: 4 / 7),
       ),
-      padding: EdgeInsets.all(10),
+    );
+  }
+}
+
+class WorksWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView.builder(
+        itemBuilder: (BuildContext context, int index) {
+          return Container(
+            padding: EdgeInsets.all(10),
+            child: Row(
+              children: <Widget>[
+                Image.network(
+                  'https://img.zzxdc.com/resources/fang_img/2019/07/13/156298674021773.jpeg!works_cover',
+                  width: 170.0,
+                  fit: BoxFit.fitHeight,
+                ),
+                Expanded(
+                  child: Container(
+                    height: 115,
+                    // color: Colors.red,
+                    padding: EdgeInsets.all(5),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      // mainAxisSize: MainAxisSize.max,
+                      // textBaseline: TextBaseline.alphabetic,
+                      // verticalDirection: VerticalDirection.down,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text('标题标题标题'),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: <Widget>[
+                            CircleAvatar(
+                              radius: 12.0,
+                              backgroundImage: NetworkImage(
+                                  'https://img.zzxdc.com/resources/static/images/noavatar_middle.gif!avter_big'),
+                            ),
+                            Text('陌上'),
+                            Image.network(
+                              'https://img.zzxdc.com/public/level/LV3.png',
+                              width: 50.0,
+                              fit: BoxFit.fitHeight,
+                            ),
+                            Image.network(
+                              'https://m.zzxdc.com/static/mobile/img/index/vip_reload.png',
+                              width: 50.0,
+                              fit: BoxFit.fitHeight,
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: <Widget>[
+                            Container(
+                              width: 65,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.thumb_up,
+                                    color: Colors.black26,
+                                  ),
+                                  Text('1111')
+                                ],
+                              ),
+                            ),
+                            Container(
+                              width: 65,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: <Widget>[
+                                  Icon(
+                                    Icons.remove_red_eye,
+                                    color: Colors.black26,
+                                  ),
+                                  Text('222')
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+        shrinkWrap: true, //为true可以解决子控件必须设置高度的问题
+        physics: NeverScrollableScrollPhysics(), //禁用滑动事件
+        itemCount: 10,
+      ),
     );
   }
 }

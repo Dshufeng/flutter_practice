@@ -42,28 +42,28 @@ class _BottomNavigationWidget extends State<BottomNavigationWidget> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 title: Text(
-                  'home',
+                  '主页',
                 )),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.picture_in_picture,
                 ),
                 title: Text(
-                  'pic',
+                  '案例',
                 )),
             BottomNavigationBarItem(
                 icon: Icon(
-                  Icons.golf_course,
+                  Icons.video_library,
                 ),
                 title: Text(
-                  'course',
+                  '课程',
                 )),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
                 ),
                 title: Text(
-                  'person',
+                  '我的',
                 )),
           ],
           currentIndex: _currentIndex,
